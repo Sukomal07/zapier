@@ -20,7 +20,7 @@ async function main() {
         producer.send({
             topic: TOPIC_NAME,
             messages: pandingRows.map(r => ({
-                value: r.zapRunId
+                value: JSON.stringify({ zapRunId: r.zapRunId, stage: 0 })
             }))
         })
 
@@ -31,6 +31,7 @@ async function main() {
                 }
             }
         })
+        await new Promise(r => setTimeout(r, 3000))
     }
 }
 
